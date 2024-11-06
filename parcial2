@@ -1,0 +1,447 @@
+public class vehiculo8 {
+
+    private String placa;
+        private String marca;
+        private double precio;
+        private int cilindraje;
+        private double impuestoCirculacion;
+        private double cuotaMesGaraje;
+       private static final double CUOTA = 100;
+    
+        
+    
+        public vehiculo8(String placa, String marca, double precio, int cilindraje, double impuestoCirculacion,
+            double cuotaMesGaraje) {
+        this.placa = null;
+        this.marca = marca;
+        this.precio = precio;
+        this.cilindraje = cilindraje;
+        this.impuestoCirculacion = impuestoCirculacion;
+        this.cuotaMesGaraje = cuotaMesGaraje;
+    }
+    
+        public void setImpuestoCirculacion(double impuestoCirculacion) {
+            this.impuestoCirculacion =  impuestoCirculacion;
+            
+        }
+    
+   
+
+
+    public String getPlaca() {
+            return placa;
+        }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public double setPrecio(double precio) {
+        return this.precio = precio;
+    }
+
+    public int getCilindraje() {
+        return cilindraje;
+    }
+
+    public void setCilindraje(int cilindraje) {
+        this.cilindraje = cilindraje;
+    }
+
+    public double getImpuestoCirculacion() {
+        return impuestoCirculacion;
+    }
+
+
+
+    public double getCuotaMesGaraje() {
+        return cuotaMesGaraje;
+    }
+
+    public void setCuotaMesGaraje(double cuotaMesGaraje) {
+    if(cuotaMesGaraje <= 0){
+     this.cuotaMesGaraje = cuotaMesGaraje;
+
+     } else{
+        System.out.println("la cuota no puede ser negativa");
+     }
+
+    }
+   
+
+    void calcularImpuestoCirculacion(){
+        this.setImpuestoCirculacion(0.02*precio);
+    }
+
+    boolean matricular(String placa){
+        if (placa.length() == 6) {
+            this.placa = placa;
+            return true;
+        }
+        return false;
+        
+    }
+
+    public String getTipoVehiculo(){
+        return "vehiculo";
+        }
+
+   
+
+    
+}
+
+// subclase auto
+public class auto extends vehiculo8 {
+
+    private boolean tieneRadio;
+    private boolean tieneNavegador;
+    
+    
+
+
+    public auto(String placa, String marca, double precio, int cilindraje, double impuestoCirculacion, double cuotaMesGaraje) {
+        super(placa, marca, precio, cilindraje, impuestoCirculacion, cuotaMesGaraje);
+        this.tieneRadio = tieneRadio;
+        this.tieneNavegador = tieneNavegador;
+    }
+
+
+    public void setTieneRadio(boolean tieneRadio) {
+        if (tieneRadio){
+            this.setImpuestoCirculacion(this.getImpuestoCirculacion()*1.01);
+        }
+        this.tieneRadio = tieneRadio;
+    }
+
+    public void setTieneNavegador(boolean tieneNavegador) {
+        if(tieneNavegador){
+            this.setImpuestoCirculacion(this.getImpuestoCirculacion()*1.02);
+        }
+        this.tieneNavegador = tieneNavegador;
+    }
+
+    public void cilindraje(int cilindraje){
+        if(cilindraje > 2499){
+            this.setCuotaMesGaraje(this.getCuotaMesGaraje() * 1.20);
+        }
+
+       
+
+    }
+  
+
+}
+
+
+//subclase moto
+public class moto extends vehiculo8 {
+    
+    private boolean tieneSidecar;
+
+  
+
+    public moto(String placa, String marca, double precio, int cilindraje, double impuestoCirculacion,
+            double cuotaMesGaraje, boolean tieneSidecar) {
+        super(placa, marca, precio, cilindraje, impuestoCirculacion, cuotaMesGaraje);
+        this.tieneSidecar = tieneSidecar;
+    }
+    public void setTieneSidecar(boolean tieneSidecar) {
+        if(tieneSidecar){
+            this.setImpuestoCirculacion(this.getImpuestoCirculacion() * 1.10);
+            this.setCuotaMesGaraje(this.getCuotaMesGaraje() * 1.50);
+        }
+        this.tieneSidecar = tieneSidecar;
+    }
+}
+
+//subclase camion
+
+public class camion extends vehiculo8 {
+
+    private int numeroEjes;
+    private String tipoCamion;
+    private int capacidadCarga;
+   
+    public camion(String placa, String marca, double precio, int cilindraje, double impuestoCirculacion,
+            double cuotaMesGaraje, int numeroEjes, String tipoCamion, int capacidadCarga) {
+        super(placa, marca, precio, cilindraje, impuestoCirculacion, cuotaMesGaraje);
+        this.numeroEjes = numeroEjes;
+        this.tipoCamion = tipoCamion;
+        this.capacidadCarga = capacidadCarga;
+    }
+
+   
+
+    public int getNumeroEjes() {
+        return numeroEjes;
+    }
+
+    public void setNumeroEjes(int numeroEjes) {
+        this.numeroEjes = numeroEjes;
+    }
+
+    public String getTipoCamion() {
+        return tipoCamion;
+    }
+
+    public void setTipoCamion(String tipoCamion) {
+        if(numeroEjes == 2){
+            System.out.println("Camion sencillo");
+            this.setCuotaMesGaraje(getCuotaMesGaraje()*1.75);
+            
+        } if (numeroEjes == 3 && numeroEjes <=6) {
+              System.out.println("Camion doble");
+              this.setCuotaMesGaraje(getCuotaMesGaraje()*2.25);
+
+        } else {
+            System.out.println("El numero de ejes esta fuera de los limites");
+        }
+       this.tipoCamion = tipoCamion;
+    }
+
+    public int getCapacidadCarga() {
+        return capacidadCarga;
+    }
+
+    public void setCapacidadCarga(int capacidadCarga) {
+        
+        this.capacidadCarga = capacidadCarga;
+    }
+
+    
+    
+    void calcularImpuestoCirculacion(){
+        this.setImpuestoCirculacion(setPrecio(capacidadCarga) *0.09); 
+        if(capacidadCarga >= 5){
+            this.setPrecio(getPrecio() + 10);
+        }
+    }
+    
+    
+}
+
+// garaje
+interface iGarage {
+    double calcularIngresos();
+    int calcularOupacionTipoVehiculo(vehiculo8 v);
+
+
+    
+}
+
+public class garaje implements iGarage {
+private static final int NUM_ESPACIOS=100;
+private vehiculo8 [] vehiculos;
+private int contador;
+
+
+
+public garaje(vehiculo8[] vehiculos, int contador) {
+    this.vehiculos = vehiculos;
+    this.contador = contador;
+}
+
+
+
+public garaje(){
+    vehiculos = new vehiculo8[NUM_ESPACIOS];
+    contador = 0;
+}
+
+public double calcularIngresos(){
+    double total = 0;
+    for (vehiculo8 v: vehiculos){
+        if(v!= null){
+            total += v.getCuotaMesGaraje();
+        }
+    }
+        return total;
+
+}
+
+
+@Override
+public int calcularOupacionTipoVehiculo(vehiculo8 v) {
+    int count = 0;{
+        for (vehiculo8 vehiculo : vehiculos) {
+            if (vehiculo != null && vehiculo.getTipoVehiculo().equals(v.getTipoVehiculo())) {
+                count++;
+            }
+           
+        }
+         
+    }
+        return count;
+}
+public boolean agregarVehiculo(vehiculo8 v) {
+        if (contador < NUM_ESPACIOS) {
+
+            if (v instanceof moto && calcularOupacionTipoVehiculo(new moto("", null, 0, 0, contador, contador, false)) >= 0.8 * NUM_ESPACIOS) {
+                System.out.println("No se puede alquilar más del 80% de plazas para motos.");
+                return false;
+            }
+            vehiculos[contador++] = v;
+            return true;
+        } else {
+            System.out.println("No hay más plazas disponibles.");
+            return false;
+        }
+    }
+
+    public boolean retirarVehiculo(String placa) {
+        for (int i = 0; i < contador; i++) {
+            if (vehiculos[i] != null && vehiculos[i].getPlaca().equals(placa)) {
+                vehiculos[i] = null;
+                System.out.println("Vehículo retirado.");
+                return true;
+            }
+        }
+        System.out.println("Vehículo no encontrado.");
+        return false;
+    }
+
+    public void mostrarVehiculos() {
+        System.out.println("Listado de vehículos:");
+        for (vehiculo8 v : vehiculos) {
+            if (v != null) {
+                System.out.println("Matrícula: " + v.getPlaca() + ", Tipo: " + v.getTipoVehiculo() + ", Cuota: " + v.getCuotaMesGaraje());
+            }
+        }
+    }
+
+    // metodo realizado en el parcial (para buscar vehiculo por matricula)
+
+    public int buscarVehiculoPorMatricula(String matricula) {
+        for (int i = 0; i < contador; i++) {
+            if (vehiculos[i].getPlaca().equals(matricula)) {
+                return 0;
+            } else {
+                return -1;
+            }
+        }
+                return contador;
+                
+    }
+
+
+
+ 
+
+    
+
+   
+}
+
+
+//menu
+
+import java.util.Scanner;
+
+
+public class menuGaraje {
+                public static void main(String[] args) {
+                    Scanner scanner = new Scanner(System.in);
+                    garaje garaje = new garaje();
+                    int opcion;
+            
+                    do {
+                        System.out.println("Menú de gestión del Garaje:");
+                        System.out.println("1. Alquilar un espacio");
+                        System.out.println("2. Retirar vehículo");
+                        System.out.println("3. Consulta de ingresos mensuales");
+                        System.out.println("4. Consulta proporción autos / motos / camiones");
+                        System.out.println("5. Listado de matrículas y cuota mensual y tipo vehículo");
+                        System.out.println("6. Buscar vehiculo");
+                        System.out.println("0. Salir");
+                        System.out.print("Seleccione una opción: ");
+                        opcion = scanner.nextInt();
+                        scanner.nextLine(); // Limpiar el buffer
+            
+                        switch (opcion) {
+                            case 1:
+                                System.out.print("Ingrese la matrícula del vehículo: ");
+                                String matricula = scanner.nextLine();
+                                System.out.print("Ingrese la marca: ");
+                                String marca = scanner.nextLine();
+                                System.out.print("Ingrese el precio: ");
+                                double precio = scanner.nextDouble();
+                                System.out.print("Ingrese el cilindraje: ");
+                                int cilindraje = scanner.nextInt();
+                                System.out.print("¿Es una moto? (true/false): ");
+                                boolean esMoto = scanner.nextBoolean();
+            
+                                vehiculo8 vehiculo;
+                                if (esMoto) {
+                                    System.out.print("¿Tiene sidecar? (true/false): ");
+                                    boolean tieneSidecar = scanner.nextBoolean();
+                                    vehiculo = new moto(marca, matricula, precio, cilindraje, precio, precio, tieneSidecar);
+                                } else {
+                                    System.out.print("¿Tiene radio? (true/false): ");
+                                    boolean tieneRadio = scanner.nextBoolean();
+                                    System.out.print("¿Tiene navegador? (true/false): ");
+                                    boolean tieneNavegador = scanner.nextBoolean();
+                                    vehiculo = new auto(matricula, marca, precio, cilindraje, opcion, cilindraje);
+                                }
+            
+                                if (vehiculo.matricular(matricula)) {
+                                    garaje.agregarVehiculo(vehiculo);
+                                } else {
+                                    System.out.println("El vehículo debe tener una matrícula válida de 6 caracteres.");
+                                }
+                                break;
+            
+                            case 2:
+                                System.out.print("Ingrese la matrícula del vehículo a retirar: ");
+                                String placaRetiro = scanner.nextLine();
+                                garaje.retirarVehiculo(placaRetiro);
+                                break;
+            
+                            case 3:
+                                System.out.println("Ingresos mensuales: " + garaje.calcularIngresos());
+                                break;
+                            // se modifico esta opcion en el parcial.
+                            case 4:
+                                int cantidadMotos = garaje.calcularOupacionTipoVehiculo(new moto(placaRetiro, marca, precio, cilindraje, opcion, cilindraje, esMoto));
+                                int cantidadAutos = garaje.calcularOupacionTipoVehiculo(new auto(placaRetiro, marca, precio, cilindraje, opcion, cantidadMotos));
+                                int cantidadCamiones = garaje.calcularOupacionTipoVehiculo(new camion(precio, marca, cantidadMotos, cantidadAutos));
+                        System.out.println("Proporción de autos, motos y camiones: " + cantidadAutos + " autos / " + cantidadMotos + " motos / " + cantidadCamiones + " camiones" );
+                        break;
+    
+                    case 5:
+                        garaje.mostrarVehiculos();
+                        break;
+                    // se creo esta opcion en el parcial
+                    case 6:
+                    System.out.print("Ingrese la matrícula a buscar: ");
+                    String matriculaBuscar = scanner.nextLine();
+                    int vehiculoEncontrado = garaje.buscarVehiculoPorMatricula(matriculaBuscar);
+                    if (vehiculoEncontrado != 0) {
+                        System.out.println("Vehículo encontrado: ");
+                    } if (vehiculoEncontrado != -1) {
+                        System.out.println("Vehículo no encontrado.");
+                    }
+                    break;
+    
+                    case 0:
+                        System.out.println("Saliendo del programa...");
+                        break;
+    
+                    default:
+                        System.out.println("Opción no válida. Intente de nuevo.");
+                }
+            } while (opcion != 0);
+    
+            scanner.close();
+        }
+    }
+ 
+
